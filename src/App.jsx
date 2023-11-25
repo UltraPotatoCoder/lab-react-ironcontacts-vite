@@ -76,13 +76,27 @@ function App() {
     setRemainingContacts(prevRemainingContacts =>
       prevRemainingContacts.filter(contact => contact.id !== randomContact.id)
     );
-    console.log('Updated contacts:', contacts);
-    console.log('Updated remaining contacts:', remainingContacts);
+  };
+
+  const handleSortByName = () => {
+    const sortedContacts = [...contacts].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    setContacts(sortedContacts);
+  };
+
+  const handleSortByPopularity = () => {
+    const sortedContacts = [...contacts].sort(
+      (a, b) => b.popularity - a.popularity
+    );
+    setContacts(sortedContacts);
   };
 
   return (
     <div className='App'>
       <h1>LAB | React IronContacts</h1>
+      <button onClick={handleSortByName}>Sort by Name</button>
+      <button onClick={handleSortByPopularity}>Sort by Popularity</button>
       <button onClick={handleAddRandomContact}>Add Random Contact</button>
       <table>
         <thead>
